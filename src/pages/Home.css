@@ -1,0 +1,8 @@
+.Home-Container {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to top right, #ffddc2, #abc7f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

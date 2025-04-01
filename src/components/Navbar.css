@@ -96,6 +96,7 @@
       flex-wrap: wrap;
       padding: 10px;
       height: auto;
+      margin-top: 20px;
     }
   
     /* Adjust sections to take full width on their own row */
@@ -119,6 +120,7 @@
     /* Reduce padding for a more compact layout */
     .navbar {
       padding: 8px;
+      margin-top: 20px;
     }
   
     .navbar-brand {

@@ -1,8 +1,26 @@
 .Home-Container {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background: linear-gradient(to top right, #ffddc2, #abc7f5);
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
+
+.Weather-Wrapper {
+    display: flex;
+    justify-content: space-between; /* Spread Today & Week */
+    gap: 1rem; /* Adjust spacing */
+    width: 90%;
+    max-width: 1200px;
+}
+
+/* Responsive Design: Stack items vertically on small screens */
+@media screen and (max-width: 768px) {
+    .Weather-Wrapper {
+        flex-direction: column; /* Stack Today and Week */
+        align-items: center; /* Center them */
+    }
+}
+

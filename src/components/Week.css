@@ -1,0 +1,56 @@
+.week-container {
+    width: 90%;
+    max-width: 500px;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 2rem auto;
+    
+  }
+  
+  .week-title {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 1rem;
+  }
+  
+  .week-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  }
+  
+  .day-name {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .day-temp {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .day-condition {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  /* 📌 Responsive: Switch to single column on small screens */
+  @media (max-width: 600px) {
+    .week-grid {
+      grid-template-columns: 1fr; /* Single column */
+    }
+  }
+  

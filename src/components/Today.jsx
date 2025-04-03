@@ -1,46 +1,72 @@
 import React from 'react';
 import './Today.css';
+import { useEffect, useState } from 'react';
 
 function Today() {
+  // State to store weather data
+  const [weatherData, setWeatherData] = useState(null);
+  const[weekData, setWeekData] = useState(null);
+
+  //Fetch weather data from server
+  useEffect(() => {
+    fetch('http://127.0.0.1:5000/today_weather')
+     .then(response => response.json())
+     .then(data => setWeatherData(data))
+  }, []);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:5000/weather')
+     .then(response => response.json())
+     .then(data => {
+      const todayDat =  data.find(item => item.day === "Today");
+      setWeekData(todayDat);
+     })
+  }, []);
+
+  if(!weatherData){
+    return <div>Loading...</div>
+  }
+
+  
+
   return (
     <div className="today-container">
       {/* TOP SECTION: Current Weather */}
       <div className="today-top">
         <div className="weather-info">
-          <h2 className="temp">12°</h2>
-          <p className="feels-like">Feels Like 35°</p>
-          <p className="condition">Mostly Sunny</p>
+          <h2 className="temp">{weekData.high_temp}</h2>
+          <p className="feels-like">{weekData.low_temp}</p>
         </div>
         <p className="weather-summary">
-          It will be mostly sunny skies. The high will be 35°.
+          {weekData.condition}
         </p>
       </div>
 
       {/* MIDDLE SECTION: Details Grid */}
       <div className="details-grid">
         <div className="detail-card">
-          <span className="detail-title">Air Quality</span>
-          <span className="detail-value">156</span>
+          <span className="detail-title">Dew Point</span>
+          <span className="detail-value">{weatherData.dew_point}</span>
         </div>
         <div className="detail-card">
           <span className="detail-title">Wind</span>
-          <span className="detail-value">1 mph</span>
+          <span className="detail-value">{weatherData.humidity}</span>
         </div>
         <div className="detail-card">
           <span className="detail-title">Humidity</span>
-          <span className="detail-value">54%</span>
+          <span className="detail-value">{weatherData.humidity}</span>
         </div>
         <div className="detail-card">
           <span className="detail-title">Pressure</span>
-          <span className="detail-value">27.65 in</span>
+          <span className="detail-value">{weatherData.pressure}</span>
         </div>
         <div className="detail-card">
           <span className="detail-title">UV Index</span>
-          <span className="detail-value">6</span>
+          <span className="detail-value">{weatherData.uv_index}</span>
         </div>
         <div className="detail-card">
           <span className="detail-title">Visibility</span>
-          <span className="detail-value">10 mi</span>
+          <span className="detail-value">{weatherData.visibility}</span>
         </div>
       </div>
 
@@ -50,11 +76,11 @@ function Today() {
         <div className="sun-moon-details">
           <div className="sun-moon-item">
             <span>Sunrise</span>
-            <strong>5:43 AM</strong>
+            <strong>{weatherData.sunrise}</strong>
           </div>
           <div className="sun-moon-item">
             <span>Sunset</span>
-            <strong>5:49 PM</strong>
+            <strong>{weatherData.sunset}</strong>
           </div>
         </div>
       </div>

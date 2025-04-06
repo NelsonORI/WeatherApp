@@ -1,29 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Week.css";
 
 function Week() {
-  // Sample weekly data (you can replace with API data)
-  const weeklyForecast = [
-    { day: "Mon", temp: "32°", condition: "Sunny" },
-    { day: "Tue", temp: "30°", condition: "Cloudy" },
-    { day: "Wed", temp: "28°", condition: "Rainy" },
-    { day: "Thu", temp: "29°", condition: "Partly Cloudy" },
-    { day: "Fri", temp: "31°", condition: "Sunny" },
-    { day: "Sat", temp: "33°", condition: "Sunny" },
-    { day: "Sun", temp: "27°", condition: "Stormy" },
-  ];
+  const [weeksData, setWeeksData] = useState(null);
+
+  useEffect(() => {
+    fetch("https://weatherapp-be-hn5g.onrender.com/weather")
+      .then((response) => response.json())
+      .then((data) => setWeeksData(data))
+      .catch((error) => console.error("Error fetching weather data:", error));
+  }, []);
 
   return (
     <div className="week-container">
       <h3 className="week-title">7-Day Forecast</h3>
       <div className="week-grid">
-        {weeklyForecast.map((day, index) => (
-          <div key={index} className="week-card">
-            <span className="day-name">{day.day}</span>
-            <span className="day-temp">{day.temp}</span>
-            <span className="day-condition">{day.condition}</span>
-          </div>
-        ))}
+        {weeksData ? (
+          weeksData.map((day, index) => (
+            <div key={index} className="week-card">
+              <span className="day-name">{day.day}</span>
+              <span className="day-temp">
+                {day.high_temp} / {day.low_temp}
+              </span>
+              <span className="day-condition">{day.condition}</span>
+              <span className="rain-chance">{day.rain_percentage}</span>
+            </div>
+          ))
+        ) : (
+          <p>Loading forecast...</p>
+        )}
       </div>
     </div>
   );
